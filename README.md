@@ -1,6 +1,6 @@
 # 云计算产品性能测试指南
 
-本文所有操作对应的是 Debian 系统，并且用户假设为 root 用户。根据本文所述指南，我对腾讯云和阿里云的三个云计算基础产品进行了评测，产品类别包括云服务器、云数据库和对象存储。具体对比结果请看：[国内公有云大幅降价后，首份一手云计算产品评测报告](example.md)
+本文所有操作对应的是 Debian 系统，并且用户假设为 root 用户。根据本文所述指南，我对腾讯云和阿里云的三个云计算基础产品进行了评测，产品类别包括云服务器、云数据库和对象存储。具体对比结果请看：[国内公有云大幅降价后，首份一手云计算产品评测报告](http://www.codingpy.com/article/guide-on-testing-cloud-products/)
 
 ## 云服务器
 
@@ -258,7 +258,7 @@ sysbench --test=oltp --oltp-table-size=1000000 --oltp-test-mode=complex --oltp-r
 * 通过 SDK 计算上传、下载、删除等操作的用时
 * 使用同一批文件，通过 SDK 做高并发测试
 
-测试脚本（基于 Python SDK）位于 test_cos 目录下。测试数据位于 csv 目录下。
+测试脚本（基于 Python SDK）位于 [Github 项目](https://github.com/bingjin/CloudTesting)中的 test_cos 目录下。测试数据位于 csv 目录下。
 
 ## 参考资料
 

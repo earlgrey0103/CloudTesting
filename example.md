@@ -1,5 +1,7 @@
 # 国内公有云大幅降价后，首份一手云计算产品评测报告
 
+> 最近国内公有云服务商掀起了一轮降价浪潮，继阿里云上月宣布降价之后，腾讯云也在本月初推出全线降价优惠。[本文](http://www.codingpy.com/article/a-comparison-of-qcloud-and-aliyun-products/)希望从云计算用户的角度，通过真实的产品使用、评测，对降价后各家的产品性价比进行较为全面的对比。对应的[ Github 项目地址](https://github.com/bingjin/CloudTesting)。
+
 大约一年前，我在某国外云厂商上部署了[自己的第一个网站](http://codingpy.com)，从此成为一名云计算用户。由于国内用户访问不便，前段时间我将网站迁回了国内，并记录下了大致的迁移过程。其中开篇简要说明了最终选择的国内云服务商（腾讯云），但并没有对背后的具体原因做深入的解释。
 
 本文打算从性能评测和价格等角度，做一下说明。
@@ -16,7 +18,7 @@
 
 在对比每一款产品时，本文先通过一系列的标准化测试比较产品的性能，然后再结合产品的最新优惠价格因素进行评价。至于两家的产品到底谁的性能更好、性价比更高，一切还是要用数据说话。
 
-> 本文采用的测试工具和方法介绍，请查看配套文章：[云计算产品性能测试指南](README.md)。阅读期间，如果你觉得具体对比过程太长，可以直接跳到本文结语部分查看对比结论。
+> 本文采用的测试工具和方法介绍，请查看配套文章：[云计算产品性能测试指南]()。对象存储部分的脚本可在[ Github 项目](https://github.com/bingjin/CloudTesting)中查看。阅读期间，如果你觉得具体对比过程太长，可以直接跳到本文结语部分查看对比结论。
 
 ## 选择对比产品
 
@@ -24,14 +26,10 @@
 
 根据[ AWS Web 应用参考架构](http://media.amazonwebservices.com/architecturecenter/AWS_ac_ra_web_01.pdf)，一个高可用、可伸缩的网站至少需要使用以下云计算资源：云服务器、云数据库、对象存储服务、负载均衡、内容分发等。因此我们在本文中主要对比云服务器、云数据库和对象存储这三个比较基础的产品。
 
-![网站参考架构图：以 AWS 服务为例](https://pic4.zhimg.com/v2-eb5f33317713b3d69e2d9a2501590c19.png)
+![网站参考架构图：以 AWS 服务为例](http://ww1.sinaimg.cn/large/65e4f1e6gw1f9ghtmvmphj20n00he76m.jpg)
 <small>网站参考架构图：以 AWS 服务为例。</small>
 
-| 云资源        |  腾讯云       | 阿里云  |  
-| ------------ |:------------:| -----:| 
-| 云服务器      | CVM          | ECS   |  
-| 云数据库   | CDB          | RDS   |  
-| 对象存储服务   | COS          | OSS   |  
+![对比产品的英文简称](http://ww2.sinaimg.cn/large/65e4f1e6gw1f9ggcjuhqvj20om07m3z7.jpg)
 
 <small>对比产品的英文简称</small>
 
@@ -51,17 +49,7 @@
 
 测试云服务器的具体配置如下：
 
-| 配置    |  腾讯云       | 阿里云  |  
-| ------- |:------------:| -----:| 
-| CPU     | 1核，Intel Xeon   | 1核，Intel Xeon  |  
-| 内存      | 2G, DDR 3          | 2G, DDR 3        |  
-| 镜像      | Debian 8.04 64位 | Debian 8.04 64位    |  
-| 系统盘   |  普通云硬盘 40G       |      普通云硬盘 40G     |
-| 数据盘   |  无      |   无       |
-| I/O 优化 |  否     |   否       |
-| 可用区   | 广东三区 | 华南1    |
-| 网络类型  | 基础网络 | 经典网络 |
-| 带宽上限  |  1Mbps  |  1Mbps  |
+![测试云服务器的具体配置](http://ww2.sinaimg.cn/large/65e4f1e6gw1f9ggf8hng9j20ok0im40l.jpg)
 
 这里指出一点，由于阿里云 ECS 云硬盘最小为 40G，而腾讯云 CVM 默认 Linux 系统赠送 20G，为了在后面对比二者价格时有可比性，将 CVM 的云硬盘调整为 40G。
 
@@ -69,21 +57,13 @@
 
 ### 性能测试过程
 
-由于测试的流程比较长，在本文中只简要介绍下所使用的工具及对应关注的指标。具体的测试操作步骤，我会在[云计算产品性能测试指南]()中介绍。
+由于测试的流程比较长，在本文中只简要介绍下所使用的工具及对应关注的指标。具体的测试操作步骤，我会在[云计算产品性能测试指南](http://www.codingpy.com/article/guide-on-testing-cloud-products/)中介绍。
 
 在测试云服务器之前，我参考了许多相关评测文章，最终决定使用如下工具和指标：
 
-| 工具    |  指标      |  数值    |
-| ------- |:------------:| :---------: |
-| UnixBench   | 综合性能  | 指数值    |
-| GeekBench 4 | 综合性能  | 指数值    |
-| cyclictest  | CPU 延迟 | avg_lat   |
-| Mbw         |  内存性能 | avg_copy |
-| fio  |   磁盘 I/O 随机读性能    | IOPS   |
-| fio  |   磁盘 I/O 随机读性能    | IOPS   |  
-| IOPing   | 磁盘 I/O 延迟 | avg  |
+![使用如下工具和指标](http://ww4.sinaimg.cn/large/65e4f1e6gw1f9gghw3kjmj20kk0cmjsu.jpg)
 
-有关其中所使用工具和指标的具体说明，请移步到这里：[云计算产品性能测试指南]()。
+有关其中所使用工具和指标的具体说明，请移步到这里：[云计算产品性能测试指南](http://www.codingpy.com/article/guide-on-testing-cloud-products/)。
 
 ### 性能测试结果
 
@@ -139,13 +119,7 @@ CPU 延迟和内存性能方面，ECS 略胜一筹，但是优势不大。在磁
 
 基于上述原因，我们分别在腾讯云和阿里云创建最低配版的云数据库（CDB 和 RDS）。具体配置如下表所示：
 
-| 配置         |  CDB       | RDS    |  
-| ------------ |:------------:| -----:| 
-| 类型    | 高IO版   | 双机高可用版      |  
-| 数据库版本 | MySQL 5.6  | MySQL 5.6  |  
-| 内存      | 1000M | 1G    |  
-| 硬盘     | 5G    | 5G    |
-| 可用区   | 广东三区 | 华南1 |
+![云数据库配置](http://ww2.sinaimg.cn/large/65e4f1e6gw1f9ggk676z2j20kg09g755.jpg)
 
 从官方划分的类型和内存大小来看，这应该是一组可比较的实例。另外，为了降低测试时网络的影响，我们继续使用对比云服务器时创建的实例，来运行测试代码。
 
@@ -155,7 +129,7 @@ MySQL 云数据库有许多性能测试工具，如自带的 mysqlap。本文所
 
 Sysbench 是一个模块化的、跨平台、多线程基准测试工具，主要用于评估测试各种不同系统参数下的数据库负载情况。还可以用来测试 CPU 性能、磁盘 I/O 性能等指标。我们用到的是其提供的 OLTP 基准测试，默认支持 MySQL 数据库。
 
-Sysbench 的安装及测试方法请看[云计算产品性能测试指南]()的云数据库部分。本文中执行了随机读写、随机只读两种测试。
+Sysbench 的安装及测试方法请看[云计算产品性能测试指南](http://www.codingpy.com/article/guide-on-testing-cloud-products/)的云数据库部分。本文中执行了随机读写、随机只读两种测试。
 
 OLTP 测试输出结果如下图所示：
 
@@ -285,7 +259,7 @@ OLTP 测试输出结果如下图所示：
 
 由于时间有限，无法将国内其他云计算厂商的产品一并加入测试，欢迎有兴趣的朋友按照本文所介绍方法对自己所使用的云计算产品进行测试，并将结果分享给我，方便大家参考。也希望本文能够帮助大家选购到满意的云计算产品。
 
-本文和[配套评测指南](README.md)中如有任何错误，还请大家指正。
+本文和[配套评测指南](http://www.codingpy.com/article/guide-on-testing-cloud-products/)中如有任何错误，还请大家指正。
 
 ## 参考资料
 
@@ -296,5 +270,5 @@ OLTP 测试输出结果如下图所示：
 * [Cloud Benchmark at Slush 2015](https://www.upcloud.com/blog/cloud-benchmark-digitalocean-aws-upcloud-slush-2015/)
 * [Benchmarking cloud servers: A Cloud Computing Insider's Guide](https://www.cloudsigma.com/benchmarking-cloud-servers-a-cloud-computing-insiders-guide/)
 * [How to Benchmark Disk I/O](https://www.binarylane.com.au/support/solutions/articles/1000055889-how-to-benchmark-disk-i-o)
-* [Benchmark MySQL Server Performance with Sysbenc](https://www.jamescoyle.net/how-to/1131-benchmark-mysql-server-performance-with-sysbench)
+* [Benchmark MySQL Server Performance with Sysbench](https://www.jamescoyle.net/how-to/1131-benchmark-mysql-server-performance-with-sysbench)
 * [Real-world benchmarking of cloud storage providers](http://lg.io/2015/10/25/real-world-benchmarking-of-s3-azure-google-cloud-storage.html)
