@@ -1,0 +1,3 @@
+requests
+oss2
+qcloud_cos_v4
