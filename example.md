@@ -49,7 +49,7 @@
 
 测试云服务器的具体配置如下：
 
-![测试云服务器的具体配置](http://ww2.sinaimg.cn/large/65e4f1e6gw1f9ggf8hng9j20ok0im40l.jpg)
+![测试云服务器的具体配置](http://ww4.sinaimg.cn/large/65e4f1e6gw1f9h8sy29vbj20oo0iwtb6.jpg)
 
 这里指出一点，由于阿里云 ECS 云硬盘最小为 40G，而腾讯云 CVM 默认 Linux 系统赠送 20G，为了在后面对比二者价格时有可比性，将 CVM 的云硬盘调整为 40G。
 
