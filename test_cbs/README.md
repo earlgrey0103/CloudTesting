@@ -245,7 +245,9 @@ SNIA 官方有提供测试服务，但是收费，而且也不适用于云存储
 
 WSAT 自动测试最终得出的是一段时间内，IOPS 的平均值，结果如下：
 
-<a href="http://ww2.sinaimg.cn/large/006tNc79gw1fag0ivl80oj30y8036aal.jpg"><img src="http://ww2.sinaimg.cn/large/006tNc79gw1fag0ivl80oj30y8036aal.jpg" alt="WSAT 测试"></a>
+<a href="http://ww2.sinaimg.cn/large/006tNc79gw1fag0ivl80oj30y8036aal.jpg">
+<img src="http://ww2.sinaimg.cn/large/006tNc79gw1fag0ivl80oj30y8036aal.jpg" alt="WSAT 测试">
+</a>
 
 上述数据，与两家厂商预期的峰值非常接近，说明两家的高效云盘能够长时间达到 IOPS 性能峰值。但是这里看不出性能如何随时间变化，必须从生成的 PDF 中查找，笔者截图如下：
 
@@ -322,54 +324,7 @@ WSAT 自动测试最终得出的是一段时间内，IOPS 的平均值，结果�
 * [AWS系列之三 使用EBS](http://www.cnblogs.com/huang0925/p/3879542.html)
 * [AWS 存储测试数据](https://blog.sungardas.com/CTOLabs/2015/09/storage-performance-benchmarking-on-aws/)
 
-### SSD 云盘
 
-下面我们来对比两家 SSD 云盘的性能，对比方式和上面相同。
-
-先看厂商的预期性能。
-
-<a href="http://ww1.sinaimg.cn/large/006tNc79gw1fah1xdjyjyj31400lgwig.jpg"><img src="http://ww1.sinaimg.cn/large/006tNc79gw1fah1xdjyjyj31400lgwig.jpg" alt="两大产生云硬盘预期性能对比"></a>
-
-上图告诉我们，**阿里云在 SSD 云盘方面有比较大的性能优势，只有在容量 1TB 以上时才低于低于腾讯云**。
-
-两家厂商在 SSD 云盘上的真实差距到底有多大？我们下面用数据说话。
-
-#### 基础指标
-
-
-
-#### WSAT
-
-#### 加入价格因素
-
-## 结语
-
-• Locate your storage system as close as possible to the applications. This helps keep latency to an absolute minimum. That is, if you are connecting to remote storage, use ioping to determine the lowest latency. This will give you the best performance. Within AWS, you can specify which availability zone which usually translates into different data center locations.
-• Match your architecture to your storage solution. Make sure you have the correct amount of cache, the right storage node processor capabilities, and the right ratio of SSD storage.
-
-## 评价
-
-腾讯云：
-
-新增数据盘不支持按量计费、容量范围较小
-
-阿里云：容量范围大、灵活性高
-
-价格：
-
-## 测试后记
-
-犯的错误：
-
-开多了虚拟机，阿里云只需要一台VM，挂载多个磁盘即可。
-
-没有以后台运行，导致断网后Terminal与VM连接中断，测试中断。
-
-双磁盘与单磁盘测试数据输出没弄明白，导致重复测试。
-
-按量付费充值余额不足，导致实例过期，测试中断。
-
-VM 未设置 SSH 登陆，导致重复输入密码。
 
 
 
