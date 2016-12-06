@@ -1,0 +1,5 @@
+vendor,disk_type,volume,test,value
+aliyun,ssd,250x,wsat,3596
+aliyun,ssd,500x,wsat,3489
+qcloud,ssd,250,wsat,6001
+qcloud,ssd,500,wsat,11999
