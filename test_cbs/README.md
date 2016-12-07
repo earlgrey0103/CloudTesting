@@ -39,7 +39,7 @@
 
 在介绍测试详情之前，先来看一看厂商对自家产品的描述。
 
-在各自的产品介绍页面（[腾讯云](https://www.qcloud.com/product/cbs.html?idx=2)、[阿里云](https://www.aliyun.com/product/disk?spm=5176.8142029.388261.46.NEXakN)），均给出了详细的性能指标及具体的计算公式。
+在各自的产品介绍页面（[腾讯云](https://www.qcloud.com/product/cbs.html?utm_source=Zhihu&utm_medium=Community&utm_campaign=Community)、[阿里云](https://www.aliyun.com/product/disk?spm=5176.8142029.388261.46.NEXakN)），均给出了详细的性能指标及具体的计算公式。
 
 - 阿里云：
     - 高效云盘
@@ -218,7 +218,7 @@ SNIA 官方有提供测试服务，但是收费，而且也不适用于云存储
 1. **腾讯云的测试峰值怎么接近预期值的两倍？**
 2. **阿里云 400GB 高效云盘的延迟怎么那么高，离预期的 1-3ms 差距很大？是不是数据有误？**
 
-第一个疑惑，腾讯云两个容量的测试峰值均为预期值的两倍。产品首页中没有直接说明，只能去翻产品文档，最终在 [CBS 使用约束页面](https://www.qcloud.com/document/product/362/5145)中找到了一段解释：
+第一个疑惑，腾讯云两个容量的测试峰值均为预期值的两倍。产品首页中没有直接说明，只能去翻产品文档，最终在 [CBS 使用约束页面](https://www.qcloud.com/document/product/362/5145?utm_source=Zhihu&utm_medium=Community&utm_campaign=Community)中找到了一段解释：
 
 > 产品文档中承诺的IO性能，如1TB的SSD云硬盘，随机IOPS能达到24000IOPS。含义是读写可同时达到24000IOPS，4KB/8KB的 IO都可做到，16KB的IO大小，则无法做到24000（由于吞吐已经达到了260MB/s的限制）。
 
@@ -273,7 +273,7 @@ WSAT 自动测试最终得出的是一段时间内，IOPS 的平均值，结果�
 
 <a href="http://ww4.sinaimg.cn/large/006tNc79gw1fagwlnfsvkj310w06iabb.jpg"><img src="http://ww4.sinaimg.cn/large/006tNc79gw1fagwlnfsvkj310w06iabb.jpg" alt="高效云盘价格对比"></a>
 
-上图中，腾讯云高效云盘按量计费的价格，为根据[官方产品页面](https://www.qcloud.com/product/cbs?idx=2)给出的定价计算，包年包月价格为单独购买云盘时系统显示价格；阿里云高效云盘的价格根据[其给出的费用规则](https://www.aliyun.com/price/product?spm=5176.54360.203004.4.hoqhjj#/disk/detail)计算。这里说明一点，腾讯云在单独购买云盘时，还只有包年包月这种模式，不够灵活。
+上图中，腾讯云高效云盘按量计费的价格，为根据[官方产品页面](https://www.qcloud.com/product/cbs?utm_source=Zhihu&utm_medium=Community&utm_campaign=Community)给出的定价计算，包年包月价格为单独购买云盘时系统显示价格；阿里云高效云盘的价格根据[其给出的费用规则](https://www.aliyun.com/price/product?spm=5176.54360.203004.4.hoqhjj#/disk/detail)计算。这里说明一点，腾讯云在单独购买云盘时，还只有包年包月这种模式，不够灵活。
 
 从上图对比来看：
 
@@ -309,9 +309,9 @@ WSAT 自动测试最终得出的是一段时间内，IOPS 的平均值，结果�
 * [网络存储协会发布企业级SSD评测规范](http://storage.it168.com/a2011/0811/1231/000001231318.shtml)
 * [阿里云：云盘参数和性能测试方法](https://help.aliyun.com/document_detail/25382.html)
 * [阿里云：云盘的特点和应用场景](https://help.aliyun.com/document_detail/25383.html?spm=5176.doc25382.6.550.dSYhIM)
-* [腾讯云：如何衡量云硬盘的性能](https://www.qcloud.com/document/product/362/6741)
-* [腾讯云：CBS 应用场景](https://www.qcloud.com/document/product/362/3065)
-* [腾讯云：CBS 产品分类及对比](https://www.qcloud.com/document/product/362/2353)
+* [腾讯云：如何衡量云硬盘的性能](https://www.qcloud.com/document/product/362/6741?utm_source=Zhihu&utm_medium=Community&utm_campaign=Community)
+* [腾讯云：CBS 应用场景](https://www.qcloud.com/document/product/362/3065?utm_source=Zhihu&utm_medium=Community&utm_campaign=Community)
+* [腾讯云：CBS 产品分类及对比](https://www.qcloud.com/document/product/362/2353?utm_source=Zhihu&utm_medium=Community&utm_campaign=Community)
 * [块存储测试套件](https://github.com/cloudharmony/block-storage)
 * [Key storage performance metrics for virtual environments](http://www.computerweekly.com/feature/Key-storage-performance-metrics-for-virtual-environments)
 * [Pro Tips For Storage Performance Testing](http://blogs.vmware.com/virtualblocks/2015/08/12/pro-tips-for-storage-performance-testing/)
