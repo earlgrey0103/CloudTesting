@@ -1,10 +1,10 @@
-# 200MB测试数据告诉你云存储性能有多强？
+# 20天持续压测，云存储性能哪家更强？
 
 上个月，笔者对国内两大云厂商（阿里云和腾讯云）的[云服务器、云数据库和云存储三种产品做了性能评测](http://www.codingpy.com/article/a-comparison-of-qcloud-and-aliyun-products/)，算是对两家的部分计算和存储产品（数据库也可视作一种存储形式）做了简要对比。虽然评测文章在 V2EX 等社区的反馈还不错，但确实还存在不少缺失。除了不好评测的售后服务等指标外，还缺少了对其他使用更为普遍的云存储产品。
 
-本文将对补充对其他云存储产品的性价比对比。
+因此，笔者近期抽空完善[《云计算产品性能测试指南》](https://github.com/bingjin/CloudTesting)，新加入了对两种云存储产品（云盘）的性能和价格对比。本次测试总计耗时 20 多天，测试的强度和时间都非常充分，本文将记录此次测试的过程和对比结果。
 
-## 云存储产品
+## 哪两种云盘？
 
 云存储类别下，目前两大云产商提供了以下产品：
 
@@ -21,19 +21,19 @@
 
 那么剩下的两家均提供的产品，就是块存储（Block Storage）了。块存储，简单来说就是提供了块设备存储的接口，一个硬盘就是一个块设备。在云产商提供的产品中，所谓的普通云盘、高效云盘、SSD 云盘，都是块存储设备。
 
-[上一篇评测文章](http://www.codingpy.com/article/a-comparison-of-qcloud-and-aliyun-products/)中，其实也对普通云盘的性能进行了对比，但被包含在云服务器性能测试中。对于选择普通云盘做对比，有的读者也提出了异议。
+> 如果你对存储类型不太熟悉，建议阅读以下文章：
+> 
+> * [从OpenStack的角度看块存储的世界](http://www.infoq.com/cn/articles/block-storage-overview)
+> * [三种存储类型比较-文件、块、对象存储](http://limu713.blog.163.com/blog/static/15086904201222024847744/)
+> * [知乎话题：块存储、文件存储、对象存储这三者的本质差别是什么？](https://www.zhihu.com/question/21536660)
+
+[上一篇评测文章](http://www.codingpy.com/article/a-comparison-of-qcloud-and-aliyun-products/)中，其实也对普通云盘的性能进行了对比，但包含在云服务器性能测试中。对于选择普通云盘做对比，有的读者也提出了异议。
 
 ![V2EX 读者评论](http://ww3.sinaimg.cn/large/006tNc79gw1fafsl3flr9j30pe058my1.jpg)
 
-确实，企业用户一般不会用虚拟机自带的云盘来存储数据，因为本地磁盘的数据迁移困难，而自建 raid 磁盘阵列的数据持久性又不高，因此大多采用 SSD 云盘或高效云盘。一线云厂商比拼的也主要是分布式块存储。
+确实，企业用户一般不会用服务器的本地存储保持核心数据，因为本地磁盘的数据迁移困难，而自建 raid5 磁盘阵列的数据持久性页不高，因此大多采用 SSD 云盘或高效云盘等分布式存储成为主流选择。一线云厂商比拼的也主要是分布式块存储，如 AWS 的 EBS 就是一种分布式块存储设备。
 
 为了较为完整地比较两大厂商的块存储产品，笔者近期对两家的高效云盘和 SSD 云盘进行了压测，算是对[上一篇](http://www.codingpy.com/article/a-comparison-of-qcloud-and-aliyun-products/)的补充。期间犯了不少错，多花了不少冤枉钱，不过总算最终得出了比较可信、直观的数据。
-
-如果你对存储类型不太熟悉，建议阅读以下文章：
-
-* [从OpenStack的角度看块存储的世界](http://www.infoq.com/cn/articles/block-storage-overview)
-* [三种存储类型比较-文件、块、对象存储](http://limu713.blog.163.com/blog/static/15086904201222024847744/)
-* [知乎话题：块存储、文件存储、对象存储这三者的本质差别是什么？](https://www.zhihu.com/question/21536660)
 
 ## 厂商预期的性能
 
@@ -74,7 +74,7 @@
 
 上图中，**红色虚线为腾讯云云盘，蓝色实线为阿里云云盘**。
 
-由于腾讯云的云盘最大容量为 4000GB，而阿里云为 32678GB，但是为了图片适宜比较，只绘制出了容量在 `[0, 4000]` 范围内的性能数据。另外，高效云盘在图中以 Hybrid 代称， 下文同。
+由于腾讯云的云盘最大容量为 4000GB，而阿里云为 32678GB，但是为了方便查看，只绘制出了容量在 `[0, 4000]` 范围内的性能数据。另外，在图中以 Hybrid 代称高效云盘，下文同。
 
 从上图来看：
 
@@ -100,7 +100,7 @@
 
 > 测试阿里云的 500GB SSD 云盘时碰到了两个大杯具，首先是余额不足导致测试程序中断，一切重来。。第二个杯具和 SSD 云盘的性能有关，具体下文中会提到。。。
 
-下文中，笔者不会具体介绍测试步骤，只说明执行了哪些测试及测试结果，具体步骤请看此前在 Github 上分享的项目：[CloudTesting/test_cbs](https://github.com/bingjin/CloudTesting)。
+下文中，笔者不会具体介绍测试步骤，只说明执行了哪些测试及测试结果，具体步骤请看此前在 Github 上分享的项目：[CloudTesting/test_cbs](https://github.com/bingjin/CloudTesting/blob/master/test_cbs/test_procedure.md)。
 
 ## 执行哪些测试
 
@@ -130,7 +130,7 @@ SNIA 官方有提供测试服务，但是收费，而且也不适用于云存储
 
 #### PTS 测试耗时长
 
-根据 PTS 规范，每项 SSD 性能测试需要经过**1、净化、2、准备工作负载、3、进入稳态、4、测试等四个环节，因此整个测试过程用时非常长，而且云盘容量越大，耗时越长。
+根据 PTS 规范，每项 SSD 性能测试需要经过**1、净化、2、准备工作负载、3、进入稳态、4、测试等四个环节，因此整个测试过程用时非常长，而且云盘容量越大，耗时越长。笔者在测试时，平均每块云盘大概花了 2 天的时间。**由于各种原因，这次至少买了 10 块云盘做测试，因此也就有了标题中“ 20 天持续压测”的说法。**
 
 以腾讯云 500G SSD 云盘的测试时间为例说明：
 
@@ -140,7 +140,7 @@ SNIA 官方有提供测试服务，但是收费，而且也不适用于云存储
 
 在介绍测试结果之前，说明一下对两家厂商测试过程的差异（云盘均为直接格式化，未分区）。
 
-- 腾讯云由于不支持单独购买按量付费的服务器，因此是开的 4 台 VM，与 VM 一起购买云盘。
+- 腾讯云由于不支持单独购买按量付费的服务器，因此开了 4 台 VM，每台配一种测试云盘。
 - 阿里云支持单独按量购买云盘，因此只开了 2 台 VM，每台挂载 2 块云盘，测试时针对每个云盘单独启动一个测试程序。
 
 ## 性能测试数据
@@ -149,7 +149,7 @@ SNIA 官方有提供测试服务，但是收费，而且也不适用于云存储
 
 测试数据大约 190MB，下载地址为：[https://pan.baidu.com/s/1i5BJZCD](https://pan.baidu.com/s/1i5BJZCD)，提取码：e2xd。其中，文件夹的命名规律为：`厂商_云盘类型_容量`。除了 `aliyun_ssd_500x` 和 `aliyun_ssd_250x` 外，每个文件夹下均有一个 `report.pdf` 文件，为测试程序自动生成，里面包含了测试结果、数据和图表。
 
-另外，笔者用 Highcharts 制作了一些可交互图表，可用来查看汇总后的各项数据。地址如下：[http://codingpy.com/specials/cbs_test/](http://codingpy.com/specials/cbs_test/)。
+另外，笔者用 Highcharts 制作了一些可交互图表，可用来查看汇总后的各项数据。地址如下：[http://www.codingpy.com/specials/cbs_test/](http://www.codingpy.com/specials/cbs_test/)。
 
 ## 阿里云的一个大坑
 
@@ -177,7 +177,7 @@ SNIA 官方有提供测试服务，但是收费，而且也不适用于云存储
 
 ### 基础指标测试
 
-首先是 50GB 容量的 IOPS、Throughput、Latency 三项指标的数据（可点击图片查看大图）：
+首先是 50GB 容量的 IOPS、Throughput、Latency 三项指标的数据（可点击图片查看大图，或查看[交互式图表](http://www.codingpy.com/specials/cbs_test/)）：
 
 
 <table>
@@ -190,7 +190,7 @@ SNIA 官方有提供测试服务，但是收费，而且也不适用于云存储
     </tr>
 </table>
 
-400GB 容量的性能对比（可点击图片查看大图）：
+400GB 容量的性能对比（可点击图片查看大图，或查看[交互式图表](http://www.codingpy.com/specials/cbs_test/)）：
 
 <table>
   <tr>
@@ -312,19 +312,10 @@ WSAT 自动测试最终得出的是一段时间内，IOPS 的平均值，结果�
 * [腾讯云：如何衡量云硬盘的性能](https://www.qcloud.com/document/product/362/6741)
 * [腾讯云：CBS 应用场景](https://www.qcloud.com/document/product/362/3065)
 * [腾讯云：CBS 产品分类及对比](https://www.qcloud.com/document/product/362/2353)
-
 * [块存储测试套件](https://github.com/cloudharmony/block-storage)
 * [Key storage performance metrics for virtual environments](http://www.computerweekly.com/feature/Key-storage-performance-metrics-for-virtual-environments)
 * [Pro Tips For Storage Performance Testing](http://blogs.vmware.com/virtualblocks/2015/08/12/pro-tips-for-storage-performance-testing/)
 * [Understanding IOPS, Latency and Storage Performance](http://louwrentius.com/understanding-iops-latency-and-storage-performance.html)
-
-
-
 * [Amazon EBS 卷类型](http://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
 * [AWS系列之三 使用EBS](http://www.cnblogs.com/huang0925/p/3879542.html)
 * [AWS 存储测试数据](https://blog.sungardas.com/CTOLabs/2015/09/storage-performance-benchmarking-on-aws/)
-
-
-
-
-

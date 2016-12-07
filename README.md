@@ -11,6 +11,6 @@
 
 针对块存储的报告，见：
 
-- [高效云盘部分]()
-- [SSD 云盘部分]()
+- [高效云盘部分](test_cbs/README.md)
+- [SSD 云盘部分](test_cbs/ssd.md)
 
